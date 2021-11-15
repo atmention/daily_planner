@@ -17,13 +17,20 @@ textarea {
 
 .boxes {
     display: flex;
-    justify-content: space-between;
+    height: 300px;
+    width: 500px;
+    background:transparent;
+    -webkit-transition: all .8s ease-in-out;
+    -moz-transition: all .8s ease-in-out;
+    -o-transition: all .8s ease-in-out;
+    transition: all .8s ease-in-out;
 }
 
-.boxes hover {
-   hover:transition-ease;
+.boxes:hover {
+    font-size: 20px;
+    transition: all 0.3s ease-in-out;
+    color: red;
 }
-
 .jumbotron {
     text-align: center;
     background-color: transparent;
