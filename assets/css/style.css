@@ -20,6 +20,10 @@ textarea {
     justify-content: space-between;
 }
 
+.boxes hover {
+   hover:transition-ease;
+}
+
 .jumbotron {
     text-align: center;
     background-color: transparent;
