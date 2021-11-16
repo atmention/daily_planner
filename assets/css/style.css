@@ -15,22 +15,25 @@ textarea {
     padding: 10px;
 }
 
-/* .boxes {
+.card { 
     display: flex;
+    justify-content: center;
     height: 300px;
-    width: 500px;
+    width: 300px;
+    padding: 0;
+    margin: 0 auto;
     background:transparent;
     -webkit-transition: all .8s ease-in-out;
     -moz-transition: all .8s ease-in-out;
     -o-transition: all .8s ease-in-out;
     transition: all .8s ease-in-out;
-} */
+} 
 
-/* .boxes:hover {
+/* .card:hover { 
     font-size: 20px;
     transition: all 0.3s ease-in-out;
     color: red;
-} */
+}  */
 
 /* .card-columns {
     justify-content: align-center;
