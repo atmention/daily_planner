@@ -17,9 +17,9 @@ let currentHour = parseInt(moment().hour());
 
 // then load the default times of 9AM - 5PM
 
+// else
 
-
-// and load any user's data from storage
+// load any user's data from storage
 // TODO: things that need to be stored for the user
     // time offset (default: 9am)
     // array of 9 cards, each with:
@@ -29,6 +29,7 @@ let currentHour = parseInt(moment().hour());
 
 // color code the current, past, and future cards
 // TODO: add data-hour attribute to cards and implement dynamic styling
+
 // check the user's starting hour for the day
 let startHour = parseInt((moment().hour(dailyHours[0]).hour()));
 
