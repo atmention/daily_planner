@@ -1,6 +1,7 @@
 // Work planner logic
 
 // TODO: Offline support for app (style, etc.)
+//     : Each section of work in criteria is explicitly commented
 
 // init global variables
 
@@ -16,7 +17,7 @@ let workingHours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 // bonus: allow days to be set as 8am, 9am, ending at diff times, etc.
 
 // get any local user configs
-const userSettings = localStorage.getItem("plannerText");
+const userSettings = localStorage.getItem("userSettings");
 console.log(userSettings);
 
 // if there is no stored data for a user,
@@ -26,15 +27,17 @@ if (userSettings === null) {
 
     // array of objects, each object containing the text
     // and configuration for each card on the page.
-    // plannerText = [{
+    // userSettings = [{
     //     id: 0,
-    //     time: 9,
+    //     hour: 9,
     //     apm: am,
     //     text: '',
     //     color: 'gray',
     // }];
+    console.log("There is no user data to be loaded.");
 } else
 
+console.log("There is user data to be loaded.");
 // load any user's data from storage
 // TODO: things that need to be stored for the user
     // time offset (default: 9am)
@@ -44,7 +47,7 @@ if (userSettings === null) {
 
 // function to loop through cards and update the timezone
 const refreshCardTimezone = function(startTime) {
-    // for plannerText.length
+    // for userSettings.length
     // set hour, am/pm, etc., to new values
 }
 
