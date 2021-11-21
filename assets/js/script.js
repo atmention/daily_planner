@@ -20,7 +20,7 @@ let userSettings = JSON.parse(localStorage.getItem("userSettings") || "[]");
 if (userSettings.length === 0) {
     // then load localStorage with a default array of placeholder data
     for (let i = 0; i < workingHours.length; i++) {
-        userSettings[i] = {id: i, text: ''};
+        userSettings[i] = { id: i, text: '' };
     }
     // and save that default array to localStorage
     localStorage.setItem("userSettings", JSON.stringify(userSettings));
@@ -42,7 +42,7 @@ for (let i = 0; i < workingHours.length; i++) {
         // set the card style to greyed-out
         $(`[data-hour=${workingHours[i]}]`).addClass("bg-secondary");
 
-    // check if hour is current
+        // check if hour is current
     } else if (parseInt((moment().hour(workingHours[i]).hour())) === currentHour) {
         // set the card style to highlighted
         $(`[data-hour=${workingHours[i]}]`).addClass("bg-info");
@@ -54,7 +54,7 @@ for (let i = 0; i < workingHours.length; i++) {
 // add save functionality to text/card
 
 // listen for a user clicking on a lock
-cardsEl.on('click', '.lockBtn', function() {
+cardsEl.on('click', '.lockBtn', function () {
     let userNote = $(this).parent().siblings('textarea').val();
     if (userNote === '') { // if the textbox is empty
         return; // do nothing
