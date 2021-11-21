@@ -40,7 +40,7 @@ textarea {
     border-bottom: 10px solid black;
 }
 
-.lockBtn {
+.lockDiv {
     display: flex;
     justify-content: flex-end;
 }
