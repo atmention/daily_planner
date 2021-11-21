@@ -1,24 +1,14 @@
 // Work planner logic
 
-// TODO: Offline support for app (style, etc.)
-//     : Each section of work in criteria is explicitly commented
-
 // init global variables
-
-// TODO: Listen for page loaded
-// when the page loads, 
-
 // current hour is retrieved from moment.js
 let currentHour = parseInt(moment().hour());
-console.log(currentHour);
-
 // store the default hours in the day
 let workingHours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
-// bonus: allow days to be set as 8am, 9am, ending at diff times, etc.
-
+// select the row element to listen for user clicks
+const cardsEl = $(".row");
 // get the current day
 const todaysDate = moment().format('LL');
-
 // and display at the top of the page
 const todaysDateEl = $("#currentDate");
 todaysDateEl.text(`Today's date: ${todaysDate}`);
@@ -28,85 +18,50 @@ let userSettings = JSON.parse(localStorage.getItem("userSettings") || "[]");
 
 // if there is no stored data for a user,
 if (userSettings.length === 0) {
-    // then load the default times of 9AM - 5PM
-    // TODO: Create the default array - With loop..?
-
-    // array of objects, each object containing the text
-    // and configuration for each card on the page.
-    console.log("There are no user settings saved.");
-    console.log("Initializing default settings...");
-
-    let settingsArray = [];
-    let apm = '';
-    for (let i = 0; i < 9; i++) {
-        if (workingHours[i] < 12) {
-            apm = 'am';
-        } else {
-            apm = 'pm';
-        }
-        settingsArray[i] = {id: i, hour: workingHours[i], apm: apm, text: '', color: 'gray',};
+    // then load localStorage with a default array of placeholder data
+    for (let i = 0; i < workingHours.length; i++) {
+        userSettings[i] = { id: i, text: '' };
     }
-
-    localStorage.setItem("userSettings", JSON.stringify(settingsArray));
+    // and save that default array to localStorage
+    localStorage.setItem("userSettings", JSON.stringify(userSettings));
     userSettings = JSON.parse(localStorage.getItem("userSettings"));
 } else {
-
-console.log("There are custom user settings to load.");
-console.log("Displaying current user settings...");
-console.log(userSettings);
-// load any user's data from storage
-// TODO: things that need to be stored for the user
-    // time offset (default: 9am)
-    // array of 9 cards, each with:
-        // text content
-        // bonus: color
+    // there are existing settings, so store them
+    userSettings = JSON.parse(localStorage.getItem("userSettings"));
+    // and display them in the textarea for each card
+    for (let i = 0; i < userSettings.length; i++) {
+        $(`[data-id=${userSettings[i].id}]`).children('.card-body').children('textarea').val(userSettings[i].text);
+    }
 }
 
 // color code the current, past, and future cards
-// TODO: add data-hour attribute to cards and implement dynamic styling
-
-// check the user's starting hour for the day
-let startHour = parseInt((moment().hour(workingHours[0]).hour()));
-
-console.log(`Current hour is: ${currentHour}`);
-console.log(`Starting hour of the loop is: ${workingHours[0]}`);
-console.log(` `);
-
 for (let i = 0; i < workingHours.length; i++) {
 
     // check if hour is past
     if (parseInt((moment().hour(workingHours[i]).hour())) < currentHour) {
         // set the card style to greyed-out
-        // TODO: the card with data-hour attribute === dailyHours[i] is greyed out
         $(`[data-hour=${workingHours[i]}]`).addClass("bg-secondary");
-        
-        console.log(`Cards with the hour ${workingHours[i]} will be grey`);
-        // 
 
-    // check if hour is current
+        // check if hour is current
     } else if (parseInt((moment().hour(workingHours[i]).hour())) === currentHour) {
         // set the card style to highlighted
-        // TODO: the card with data-hour attribute === dailyHours[i] is highlighted
         $(`[data-hour=${workingHours[i]}]`).addClass("bg-info");
-        console.log(`Cards with the hour ${workingHours[i]} will be highlighted`);
-
     } else {
-        // do nothing to these cards
-        console.log(`Cards with the hour ${workingHours[i]} will be for a future time`);
+        // do nothing to these cards, since they are in the future
     }
 }
 
 // add save functionality to text/card
-// bonus: warn users before leaving that there are unsaved changes
 
-// listen for a user clicking on the lock
-// then save the text and color value to localStorage
-
-
-// allow buttons to change color of text boxes
-
-// listen for user clicks on buttons
-// then change the background color to the selected color
-// bonus: possibly change styles/text color if appropriate
-
-// TODO: Research how to play haptic sounds when hovering, etc.
+// listen for a user clicking on a lock
+cardsEl.on('click', '.lockBtn', function () {
+    let userNote = $(this).parent().siblings('textarea').val();
+    if (userNote === '') { // if the textbox is empty
+        return; // do nothing
+    } else { // pull the text from the card
+        let currentCardId = $(this).parent().parent().parent().data('id');
+        userSettings[currentCardId].text = userNote;
+        // and update the localStorage
+        localStorage.setItem("userSettings", JSON.stringify(userSettings));
+    }
+});
