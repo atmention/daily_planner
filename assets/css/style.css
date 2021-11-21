@@ -2,12 +2,12 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 24px;
     line-height: 1;
-    background-image:url('../images/tropical-beach-1454007190ZAK.jpg');
+    background-image: url('../images/tropical-beach-1454007190ZAK.jpg');
     background-size: fill;
 }
 
 textarea {
-    background: #a2acb3;
+    background-color: #e1e1e1;
     border: none;
     resize: none;
     color: #000005;
@@ -25,35 +25,24 @@ textarea {
     width: 300px;
     padding: 0;
     margin: 0 auto;
-    background-color: #888f94;
     -webkit-transition: all .8s ease-in-out;
     -moz-transition: all .8s ease-in-out;
     -o-transition: all .8s ease-in-out;
     transition: all .8s ease-in-out;
     border-color: black;
-} 
-
-.card-header {
-    background: #80878c;
 }
-
-/* .card:hover { 
-    font-size: 20px;
-    transition: all 0.3s ease-in-out;
-    color: red;
-}  */
-
-/* .card-columns {
-    justify-content: align-center;
-    align-items: center;
-} */
 
 .jumbotron {
     text-align: center;
-    background-color: rgba(255, 255, 250, 0.4);
+    background-color: rgba(255, 255, 250, 0.8);
     color: black;
     border-radius: 0;
     border-bottom: 10px solid black;
+}
+
+.lockBtn {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .description {
