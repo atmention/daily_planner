@@ -9,16 +9,22 @@
 // when the page loads, 
 
 // current hour is retrieved from moment.js
-// let currentHour = parseInt(moment().hour());
-// moment().format();
+let currentHour = parseInt(moment().hour());
+console.log(currentHour);
 
 // store the default hours in the day
 let workingHours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 // bonus: allow days to be set as 8am, 9am, ending at diff times, etc.
 
+// get the current day
+const todaysDate = moment().format('LL');
+
+// and display at the top of the page
+const todaysDateEl = $("#currentDate");
+todaysDateEl.text(`Today's date: ${todaysDate}`);
+
 // get any local user configs
 let userSettings = JSON.parse(localStorage.getItem("userSettings") || "[]");
-console.log("Number of settings saved: " + userSettings.length);
 
 // if there is no stored data for a user,
 if (userSettings.length === 0) {
@@ -41,18 +47,9 @@ if (userSettings.length === 0) {
         settingsArray[i] = {id: i, hour: workingHours[i], apm: apm, text: '', color: 'gray',};
     }
 
-    // userSettings = [{
-    //     id: 0,
-    //     hour: 9,
-    //     apm: 'am',
-    //     text: '',
-    //     color: 'gray',
-    // }];
-
     localStorage.setItem("userSettings", JSON.stringify(settingsArray));
     userSettings = JSON.parse(localStorage.getItem("userSettings"));
-    console.log("New settings saved successfully.")
-} else
+} else {
 
 console.log("There are custom user settings to load.");
 console.log("Displaying current user settings...");
@@ -63,44 +60,41 @@ console.log(userSettings);
     // array of 9 cards, each with:
         // text content
         // bonus: color
-
-
-// function to loop through cards and update the timezone
-function refreshCardTimezone(startTime) {
-    // for userSettings.length
-    // set hour, am/pm, etc., to new values
 }
 
-// // color code the current, past, and future cards
-// // TODO: add data-hour attribute to cards and implement dynamic styling
+// color code the current, past, and future cards
+// TODO: add data-hour attribute to cards and implement dynamic styling
 
-// // check the user's starting hour for the day
-// let startHour = parseInt((moment().hour(dailyHours[0]).hour()));
+// check the user's starting hour for the day
+let startHour = parseInt((moment().hour(workingHours[0]).hour()));
 
-// console.log(`Current hour is: ${currentHour}`);
-// console.log(`Starting hour of the loop is: ${dailyHours[0]}`);
-// console.log(` `);
+console.log(`Current hour is: ${currentHour}`);
+console.log(`Starting hour of the loop is: ${workingHours[0]}`);
+console.log(` `);
 
-// for (let i = 0; i < dailyHours.length; i++) {
+for (let i = 0; i < workingHours.length; i++) {
 
-//     // check if hour is past
-//     if (parseInt((moment().hour(dailyHours[i]).hour())) < currentHour) {
-//         // set the card style to greyed-out
-//         // TODO: the card with data-hour attribute === dailyHours[i] is greyed out
-//         console.log(`Cards with the hour ${dailyHours[i]} will be grey`);
-//         // 
+    // check if hour is past
+    if (parseInt((moment().hour(workingHours[i]).hour())) < currentHour) {
+        // set the card style to greyed-out
+        // TODO: the card with data-hour attribute === dailyHours[i] is greyed out
+        $(`[data-hour=${workingHours[i]}]`).addClass("bg-secondary");
+        
+        console.log(`Cards with the hour ${workingHours[i]} will be grey`);
+        // 
 
-//     // check if hour is current
-//     } else if (parseInt((moment().hour(dailyHours[i]).hour())) === currentHour) {
-//         // set the card style to highlighted
-//         // TODO: the card with data-hour attribute === dailyHours[i] is highlighted
-//         console.log(`Cards with the hour ${dailyHours[i]} will be highlighted`);
+    // check if hour is current
+    } else if (parseInt((moment().hour(workingHours[i]).hour())) === currentHour) {
+        // set the card style to highlighted
+        // TODO: the card with data-hour attribute === dailyHours[i] is highlighted
+        $(`[data-hour=${workingHours[i]}]`).addClass("bg-info");
+        console.log(`Cards with the hour ${workingHours[i]} will be highlighted`);
 
-//     } else {
-//         // do nothing to these cards
-//         console.log(`Cards with the hour ${dailyHours[i]} will be for a future time`);
-//     }
-// }
+    } else {
+        // do nothing to these cards
+        console.log(`Cards with the hour ${workingHours[i]} will be for a future time`);
+    }
+}
 
 // add save functionality to text/card
 // bonus: warn users before leaving that there are unsaved changes
