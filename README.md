@@ -49,7 +49,7 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+A nice little daily planner to help better organize your day. 
 
 [![Product Name Screen Shot][product-screenshot]](https://atmention.github.io/daily_planner/)
 
